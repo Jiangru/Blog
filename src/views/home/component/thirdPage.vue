@@ -1,10 +1,10 @@
 <template lang="pug">
-  .second-page(:style="styles")
+  .third-page(:style="styles")
 </template>
 
 <script>
 export default {
-  name: 'secondPage',
+  name: 'thirdPage',
   data() {
     return {
       
@@ -27,8 +27,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.second-page {
-  background-image: url('~@/assets/images/bg_image2.jpg');
+.third-page {
+  background-image: url('~@/assets/images/bg_image3.jpg');
   background-size: cover;
 }
 </style>
