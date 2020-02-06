@@ -1,5 +1,7 @@
 <template lang="pug">
   .home
+    .home-nav-rectangle(:class="{'home-nav-rectangle-show': showNav}")
+    .home-nav-mask(:class="{'home-nav-mask-show': showNav}")
     .home-scroll-wrap
       .home-list(ref="scrollObj" :style="`height: ${sHeight}px`")
         .home-item
@@ -16,6 +18,11 @@
     ul.home-nav
       li.home-nav-item(v-for="i in totalNav" @click="handleClickNav(i)")
         span(:class="{'home-nav-active': activeIndex === i}")
+    .home-audio-btn(@mouseenter="mouseEnter" @mouseout="mouseOut" @click="playMusic")
+      span.home-audio-play(v-show="isPlay && showPlay")
+      span.home-audio-pause(v-show="!isPlay && showPlay")
+    .home-audio
+      audio(src="@/assets/images/music.mp3" ref="audio") Your browser does not support the audio tag.
 </template>
 <script>
 import firstPage from './component/firstPage.vue'
@@ -30,7 +37,11 @@ export default {
       activeIndex: 1,   // 当前激活的页面
       totalNav: 3,      // 所有的导航点
       scrollObj: null,
-      closeNav: false,  // 导航是否为关闭
+      closeNav: false,  // 导航按钮是否为关闭
+      showNav: false,   // 是否展示导航栏
+      audio: null,
+      isPlay: true,     // 播放按钮的状态
+      showPlay: false,
     }
   },
   components: {
@@ -39,6 +50,8 @@ export default {
     thirdPage
   },
   mounted() {
+    // 获取音频实例
+    this.audio = this.$refs.audio
     // 需要滚动的实例
     this.scrollObj = this.$refs.scrollObj
     this.initBackGround()
@@ -59,6 +72,24 @@ export default {
     },
     toggleNav() {
       this.closeNav = !this.closeNav
+      this.showNav = this.closeNav
+    },
+    mouseEnter() {
+      this.showPlay = true
+    },
+    mouseOut(e) {
+      // 移出后的鼠标不在内部的伪元素或者自己本身的时候需要隐藏按钮
+      if (e.toElement.nodeName !== 'SPAN' && e.toElement.className !== 'home-audio-btn') {
+        this.showPlay = false
+      }
+    },
+    playMusic() {
+      if (this.isPlay) {
+        this.audio.play()
+      } else {
+        this.audio.pause()
+      }
+      this.isPlay = !this.isPlay
     },
     initBackGround() {
       this.sHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -115,12 +146,70 @@ export default {
       background: rgba(250, 250, 250, .1);
     }
   }
+  &-audio-btn {
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    margin-top: 51px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background: rgba(255,255,255, .6);
+    }
+  }
+  &-audio-play{
+    &::before {
+      content: '';
+      border: 10px solid transparent;
+      border-right-width: 0;
+      border-left-color: #333;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &-audio-pause{
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      left: 22px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 4px;
+      height: 20px;
+      background: #333;
+    }
+    &::after {
+      left: 28px;
+    }
+  }
   &-nav {
     position: fixed;
+    z-index: 101;
     width: 20px;
     right: 50px;
     top: 50%;
     transform: translateY(-50%);
+    &::before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      bottom: -70px;
+      right: -10px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-image: url('~@/assets/images/music_bg.jpg');
+      background-size: cover;
+      cursor: pointer;
+      overflow: hidden;
+      animation: music 10s linear infinite;
+    }
     &-active {
       transform: scale(1.8);
       background: rgba(255,255,255, .8);
@@ -157,6 +246,42 @@ export default {
       border-radius: 50%;
       cursor: pointer;
       box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2)
+    }
+    /* 导航侧栏样式 */
+    &-rectangle {
+      position: fixed;
+      z-index: 99;
+      top: 0;
+      right: -100%;
+      display: inline-block;
+      border-right-width: 235px;
+      border-right-style: solid;
+      border-right-color: #e4e2e3;
+      border-left-color: transparent;
+      border-left-style: solid;
+      border-left-width: 100px;
+      border-top-width: 0px;
+      border-top-style: none;
+      border-bottom-width: 937px;
+      border-bottom-style: solid;
+      border-bottom-color: #e4e2e3;
+      transition: right .3s ease-in-out; 
+    }
+    &-rectangle-show {
+      right: 0;
+    }
+    /* 导航侧栏遮罩层 */
+    &-mask {
+      position: fixed;
+      z-index: 98;
+      height: 937px;
+      right: 0;
+      width: 0;
+      background: rgba(0,0,0,.75);
+      transition: width .1s ease-in-out;
+    }
+    &-mask-show {
+      width: 100%;
     }
     &-icon {
       position: absolute;
@@ -199,6 +324,14 @@ export default {
         transform: translateY(-10px) rotate(-45deg);
       }
     }
+  }
+}
+@keyframes music {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>
