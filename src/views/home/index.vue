@@ -13,6 +13,9 @@
         .home-item
           thirdPage(:height="sHeight")
           .home-item-mask
+        .home-item
+          fourthPage(:height="sHeight")
+          .home-item-mask
     .home-nav-toggle(@click="toggleNav")
       .home-nav-icon(:class="{'home-nav-icon-close': closeNav}")
     ul.home-nav
@@ -28,6 +31,7 @@
 import firstPage from './component/firstPage.vue'
 import secondPage from './component/secondPage.vue'
 import thirdPage from './component/thirdPage.vue'
+import fourthPage from './component/fourthPage.vue'
 import _ from '@/utils'
 export default {
   name: 'Home',
@@ -35,7 +39,7 @@ export default {
     return {
       sHeight: 0,
       activeIndex: 1,   // 当前激活的页面
-      totalNav: 3,      // 所有的导航点
+      totalNav: 4,      // 所有的导航点
       scrollObj: null,
       closeNav: false,  // 导航按钮是否为关闭
       showNav: false,   // 是否展示导航栏
@@ -47,7 +51,8 @@ export default {
   components: {
     firstPage,
     secondPage,
-    thirdPage
+    thirdPage,
+    fourthPage
   },
   mounted() {
     // 获取音频实例
@@ -137,14 +142,14 @@ export default {
   }
   &-item {
     position: relative;
-    &-mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(250, 250, 250, .1);
-    }
+    // &-mask {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   background: rgba(250, 250, 250, .1);
+    // }
   }
   &-audio-btn {
     position: fixed;

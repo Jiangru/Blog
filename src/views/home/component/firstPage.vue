@@ -28,7 +28,7 @@
           .first-page-plane.eleven
           .first-page-plane.twelve
       .first-page-text
-        p Hello, I'm Jhon
+        p Hello, I'm John
         p Yes! I'm a Kobe Fans
     .first-page-btn(@click="toggleStyle()") mamba out
 </template>
