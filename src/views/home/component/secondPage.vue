@@ -113,8 +113,4 @@ export default {
     font-size: 16px;
   }
 }
-@font-face {
-  font-family: 'secondFont';
-  src: url('~@/assets/font/fontone.ttf');
-}
 </style>

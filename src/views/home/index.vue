@@ -1,7 +1,12 @@
 <template lang="pug">
   .home
+    // 导航侧栏
     .home-nav-rectangle(:class="{'home-nav-rectangle-show': showNav}")
+      .home-nav-rectangle-menu
+        .home-nav-rectangle-menu-item(v-for="(item, i) in menuList" :key="i" @click="handleClickMenu(i + 1)") {{ item.label }}
+    // 遮罩层
     .home-nav-mask(:class="{'home-nav-mask-show': showNav}")
+    // 页面集合
     .home-scroll-wrap
       .home-list(ref="scrollObj" :style="`height: ${sHeight}px`")
         .home-item
@@ -16,11 +21,14 @@
         .home-item
           fourthPage(:height="sHeight")
           .home-item-mask
+    // 导航按钮
     .home-nav-toggle(@click="toggleNav")
       .home-nav-icon(:class="{'home-nav-icon-close': closeNav}")
+    // 导航点点
     ul.home-nav
       li.home-nav-item(v-for="i in totalNav" @click="handleClickNav(i)")
         span(:class="{'home-nav-active': activeIndex === i}")
+    // 音乐
     .home-audio-btn(@mouseenter="mouseEnter" @mouseout="mouseOut" @click="playMusic")
       span.home-audio-play(v-show="isPlay && showPlay")
       span.home-audio-pause(v-show="!isPlay && showPlay")
@@ -46,6 +54,20 @@ export default {
       audio: null,
       isPlay: true,     // 播放按钮的状态
       showPlay: false,
+      menuList: [
+        {
+          label: '首页'
+        },
+        {
+          label: '自我介绍'
+        },
+        {
+          label: '工作经历'
+        },
+        {
+          label: 'canvas作品展示'
+        }
+      ]
     }
   },
   components: {
@@ -69,6 +91,12 @@ export default {
     window.onmousewheel = document.onmousewheel = _.throttle(this.scrollFunc, 1700);
   },
   methods: {
+    handleClickMenu (i) {
+      // 关闭导航
+      this.toggleNav()
+      // 滚动到对应页面
+      this.handleClickNav(i)
+    },
     handleClickNav(i) {
       this.activeIndex = i
       const diffY = this.sHeight * (i - 1)
@@ -155,7 +183,7 @@ export default {
     position: fixed;
     z-index: 999;
     top: 50%;
-    margin-top: 51px;
+    margin-top: 63px;
     right: 40px;
     width: 50px;
     height: 50px;
@@ -250,12 +278,15 @@ export default {
       height: 60px;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2)
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+      &:hover {
+        background: rgba(216, 147, 92, .5);
+      }
     }
     /* 导航侧栏样式 */
     &-rectangle {
       position: fixed;
-      z-index: 99;
+      z-index: 999;
       top: 0;
       right: -100%;
       display: inline-block;
@@ -271,6 +302,33 @@ export default {
       border-bottom-style: solid;
       border-bottom-color: #e4e2e3;
       transition: right .3s ease-in-out; 
+      &-menu {
+        position: absolute;
+        z-index: 1000;
+        top: 360px;
+        right: -200px;
+        &-item {
+          position: relative;
+          color: #2088B5;
+          font-family: 'thirdFont';
+          line-height: 60px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(32, 136, 181, .5);
+            &::after {
+              position: absolute;
+              z-index: 1000;
+              left: -60px;
+              top: 40px;
+              display: block;
+              content: '';
+              height: 2px;
+              width: 200px;
+              background: #2088B5;
+            }
+          }
+        }
+      }
     }
     &-rectangle-show {
       right: 0;
@@ -283,7 +341,7 @@ export default {
       right: 0;
       width: 0;
       background: rgba(0,0,0,.75);
-      transition: width .1s ease-in-out;
+      // transition: width .1s ease-in-out;
     }
     &-mask-show {
       width: 100%;

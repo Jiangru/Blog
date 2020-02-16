@@ -191,8 +191,4 @@ export default {
     }
   }
 }
-@font-face {
-  font-family: 'thirdFont';
-  src: url('~@/assets/font/SourceHanSansCN-Normal.otf');
-}
 </style>

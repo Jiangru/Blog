@@ -293,8 +293,4 @@ export default {
     transform: rotateY(-360deg);
   }
 }
-@font-face {
-  font-family: 'firstFont';
-  src: url('~@/assets/font/BRUX.otf');
-}
 </style>
