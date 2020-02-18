@@ -1,0 +1,12 @@
+/*声明 WebFont*/
+@font-face {
+  font-family: 'thirdFont';
+  src: url('../assets/font/SourceHanSansCN-Normal.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*使用选择器指定字体*/
+#demo {
+  font-family: 'thirdFont';
+}
