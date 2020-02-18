@@ -82,6 +82,9 @@ export default {
     // 需要滚动的实例
     this.scrollObj = this.$refs.scrollObj
     this.initBackGround()
+    window.onresize = () => {
+      this.initBackGround()
+    }
     // 火狐的是：DOMMouseScroll;
     // IE/Opera/Chrome：直接添加事件*/
     // if(document.addEventListener){

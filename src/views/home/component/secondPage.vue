@@ -13,7 +13,6 @@
         p.second-page-text - 坐标深圳，目前就职于中国平安人寿总部
         h1.second-page-title - 与君共勉
         p.second-page-text - 当你想要放弃的时候，想下是什么让你当初坚持走到现在
-      canvas(ref="info" width="800" height="500")
 </template>
 
 <script>
@@ -38,22 +37,8 @@ export default {
       }
     }
   },
-  mounted() {
-    this.initCanvas()
-  },
-  methods: {
-    initCanvas() {
-      const canvas = this.$refs.info
-      if (!canvas.getContext) return
-      const ctx = canvas.getContext('2d')
-      // 绘制线条
-      ctx.beginPath()
-      ctx.moveTo(50, 50)
-      ctx.lineTo(200, 200)
-      ctx.fillStyle = 'rgb(233, 0, 24)'
-      ctx.stroke()
-    }
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
 <style lang="scss" scoped>
