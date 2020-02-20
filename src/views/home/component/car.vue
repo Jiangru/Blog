@@ -130,7 +130,9 @@ function mountain(ctx) {
     ctx.beginPath()
     ctx.lineWidth = 1
     ctx.moveTo(this.x, this.y)
-    ctx.lineTo(this.x, this.y - 30)
+    ctx.lineTo(this.x, this.y - 20)
+    // 山坳
+    ctx.arc(this.x + 2.5, this.y - 20, 2.5, Math.PI / 1.2, Math.PI / 9, true)
     ctx.lineTo(this.x + 20, this.y - 60)
     // 山顶
     ctx.arc(this.x + 35, this.y - 55, 15, -Math.PI / 1.2, -Math.PI / 9, false)
@@ -143,33 +145,41 @@ function mountain(ctx) {
     ctx.lineTo(this.x + 135, this.y - 20)
     // 山坳
     ctx.arc(this.x + 140, this.y - 23, 5, Math.PI / 1.2, Math.PI / 9, true)
-    ctx.lineTo(this.x + 165, this.y - 50)
+    ctx.lineTo(this.x + 160, this.y - 60)
+    
     // 山顶
-    ctx.arc(this.x + 175, this.y - 42, 13, -Math.PI / 1.2, -Math.PI / 9, false)
-    ctx.lineTo(this.x + 195, this.y - 25)
+    ctx.arc(this.x + 175, this.y - 55, 15, -Math.PI / 1.2, -Math.PI / 9, false)
+    ctx.lineTo(this.x + 205, this.y - 30)
     // 山坳
-    ctx.arc(this.x + 205, this.y - 23, 5, Math.PI / 1.2, Math.PI / 9, true)
-    ctx.lineTo(this.x + 225, this.y - 60)
+    ctx.arc(this.x + 210, this.y - 30, 5, Math.PI / 1.2, Math.PI / 9, true)
+    ctx.lineTo(this.x + 230, this.y - 80)
     // 山顶
-    ctx.arc(this.x + 235, this.y - 52, 13, -Math.PI / 1.2, -Math.PI / 9, false)
-    ctx.lineTo(this.x + 258, this.y - 25)
+    ctx.arc(this.x + 240, this.y - 72, 13, -Math.PI / 1.2, -Math.PI / 9, false)
+    ctx.lineTo(this.x + 275, this.y - 20)
     // 山坳
-    ctx.arc(this.x + 265, this.y - 23, 5, Math.PI / 1.2, Math.PI / 9, true)
-    ctx.lineTo(this.x + 300, this.y - 70)
+    ctx.arc(this.x + 280, this.y - 23, 5, Math.PI / 1.2, Math.PI / 9, true)
+    ctx.lineTo(this.x + 300, this.y - 60)
+    
     // 山顶
-    ctx.arc(this.x + 315, this.y - 72, 13, -Math.PI / 1.2, -Math.PI / 9, false)
-    ctx.lineTo(this.x + 345, this.y - 20)
+    ctx.arc(this.x + 315, this.y - 55, 15, -Math.PI / 1.2, -Math.PI / 9, false)
+    ctx.lineTo(this.x + 345, this.y - 30)
     // 山坳
-    ctx.arc(this.x + 350, this.y - 23, 5, Math.PI / 1.2, Math.PI / 9, true)
-    ctx.lineTo(this.x + 355, this.y - 30)
-    ctx.lineTo(this.x + 355, this.y)
+    ctx.arc(this.x + 350, this.y - 30, 5, Math.PI / 1.2, Math.PI / 9, true)
+    ctx.lineTo(this.x + 370, this.y - 80)
+    // 山顶
+    ctx.arc(this.x + 380, this.y - 72, 13, -Math.PI / 1.2, -Math.PI / 9, false)
+    ctx.lineTo(this.x + 415, this.y - 20)
+    // 山坳
+    ctx.arc(this.x + 420, this.y - 23, 5, Math.PI / 1.2, Math.PI / 9, true)
+    ctx.lineTo(this.x + 440, this.y - 60)
+
+    ctx.lineTo(this.x + 440, this.y)
     const grd = ctx.createLinearGradient(this.x, this.y, this.x, this.y - 80);
     grd.addColorStop(0, "#71A523");
     grd.addColorStop(1, "#A9E156"); 
     ctx.fillStyle = grd
     ctx.closePath()
     ctx.fill()
-    // ctx.stroke()
   }
 }
 export default {
@@ -218,7 +228,7 @@ export default {
       if (this.roadObj.startX <= -30) {
         this.roadObj.startX = -10
       }
-      if (this.mountainObj.x <= -55) {
+      if (this.mountainObj.x <= -140) {
         this.mountainObj.x = 0
       }
       this.reset()
