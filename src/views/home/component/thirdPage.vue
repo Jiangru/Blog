@@ -90,7 +90,7 @@ export default {
   }
   &-head {
     position: relative;
-    top: 80px;
+    top: 7%;
     text-align: center;
     &::after {
       position: absolute;
@@ -115,7 +115,7 @@ export default {
   }
   &-content {
     position: relative;
-    top: 160px;
+    top: 12%;
     height: 80%;
     color: #D7D3D3;
     /* 就职时间 */
@@ -154,7 +154,7 @@ export default {
       position: absolute;
       text-align: left;
       left: 100px;
-      top: 250px;
+      top: 36%;
     }
     &-center {
       position: absolute;
@@ -164,15 +164,15 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       &-circle1 {
-        top: 30px;
+        top: 6%;
         @include circle;
       }
       &-circle2 {
-        top: 250px;
+        top: 40%;
         @include circle;
       }
       &-circle3 {
-        top: 460px;
+        top: 72%;
         @include circle;
       }
     }
@@ -182,12 +182,12 @@ export default {
     .right1 {
       position: absolute;
       right: 0;
-      top: 30px;
+      top: 5%;
     }
     .right2 {
       position: absolute;
       right: 0;
-      top: 460px;
+      top: 64%;
     }
   }
 }

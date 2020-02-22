@@ -10,4 +10,12 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // 修改标题
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})
+
 export default router

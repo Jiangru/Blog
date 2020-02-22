@@ -3,7 +3,7 @@
     // 导航侧栏
     .home-nav-rectangle(:class="{'home-nav-rectangle-show': showNav}")
       .home-nav-rectangle-menu
-        .home-nav-rectangle-menu-item(v-for="(item, i) in menuList" :key="i" @click="handleClickMenu(i + 1)") {{ item.label }}
+        .home-nav-rectangle-menu-item(v-for="(item, i) in menuList" :key="i" @click="handleClickMenu(item)") {{ item.label }}
     // 遮罩层
     .home-nav-mask(:class="{'home-nav-mask-show': showNav}")
     // 页面集合
@@ -56,16 +56,24 @@ export default {
       showPlay: false,
       menuList: [
         {
-          label: '首页'
+          label: '首页',
+          path: 1
         },
         {
-          label: '自我介绍'
+          label: '自我介绍',
+          path: 2
         },
         {
-          label: '工作经历'
+          label: '工作经历',
+          path: 3
         },
         {
-          label: 'canvas作品展示'
+          label: 'canvas作品展示',
+          path: 4
+        },
+        {
+          label: '博客',
+          path: '/blog'
         }
       ]
     }
@@ -94,11 +102,19 @@ export default {
     window.onmousewheel = document.onmousewheel = _.throttle(this.scrollFunc, 1700);
   },
   methods: {
-    handleClickMenu (i) {
+    handleClickMenu (item) {
+      const path = item.path
+      if (typeof path === 'string') {
+        this.$router.push({
+          path
+        })
+        this.toggleNav()
+        return
+      }
       // 关闭导航
       this.toggleNav()
       // 滚动到对应页面
-      this.handleClickNav(i)
+      this.handleClickNav(path)
     },
     handleClickNav(i) {
       this.activeIndex = i

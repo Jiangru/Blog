@@ -49,7 +49,7 @@ export default {
     position: absolute;
     font-size: 36px;
     color: #D8935C;
-    top: 350px;
+    top: 33%;
     left: 50%;
     transform: translateX(-50%);
     border: 2px solid #D8935C;

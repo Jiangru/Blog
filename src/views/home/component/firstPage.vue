@@ -27,6 +27,7 @@
           .first-page-plane.ten
           .first-page-plane.eleven
           .first-page-plane.twelve
+      .first-page-time (1978-08-23 ~ 2020-01-26)
       .first-page-text
         p Hello, I'm John
         p Yes! I'm a Kobe Fans
@@ -77,13 +78,25 @@ export default {
   }
   &-text {
     position: absolute;
-    bottom: 120px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     font-family: "firstFont";
     line-height: 40px;
     font-size: 28px;
     letter-spacing: 2px;
+    text-align: center;
+  }
+  &-time {
+    position: absolute;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "微软雅黑";
+    line-height: 40px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: rgba(240, 248, 255, .5);
     text-align: center;
   }
   &-stage {

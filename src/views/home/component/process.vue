@@ -27,9 +27,10 @@ function particle(ctx, bar) {
   this.x = 23 + bar.widths
   this.y = 82
   
-  this.vx = 0.8 + Math.random()*1
-  this.v = Math.random()*5
-  this.g = 1 + Math.random()*3
+  // 水平位移差
+  this.vx = 0.8 + Math.random() * 1
+  this.v = Math.random() * 5
+  this.g = 1 + Math.random() * 3
   this.down = false
   
   this.draw = function(){
@@ -98,17 +99,15 @@ export default {
       for(var i = 0; i < this.particles.length; i++){
         var p = this.particles[i];
         p.x -= p.vx;
-        if(p.down == true){
+        if (p.down === true) {
           p.g += .1;
           p.y += p.g;
-        }
-        else{
-          if(p.g<0){
+        } else {
+          if(p.g < 0){
             p.down = true;
             p.g += 0.1;
             p.y += p.g;
-          }
-          else{
+          } else{
             p.y -= p.g;
             p.g -= 0.1;
           }

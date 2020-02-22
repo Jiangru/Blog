@@ -1,6 +1,7 @@
 <template lang="pug">
   .canvas-car
     canvas(id="car" width="300" height="200")
+    img(id="sun" src="../../../assets/images/sun.png")
 </template>
 <script>
 /**
@@ -29,6 +30,7 @@ function carMode(ctx) {
   this.x = 130
   this.y = 180
   this.r = 11
+  this.hue = 27
   this.draw = function() {
     ctx.beginPath()
     ctx.moveTo(this.x - 20, this.y)
@@ -48,7 +50,7 @@ function carMode(ctx) {
     ctx.arc(this.x, this.y - 6, this.r + 6, -Math.PI / 1.6, -Math.PI, true);
     ctx.lineTo(this.x - 20, this.y)
     ctx.closePath()
-    ctx.fillStyle = '#F49C48'
+    ctx.fillStyle = 'hsla('+ this.hue +', 57%, 50%, 1)'
     ctx.fill()
     // 画后车窗
     ctx.beginPath()
@@ -221,15 +223,26 @@ export default {
       this.tyre.draw()
       this.mountainObj.draw()
       this.carObj.draw()
+      // const img = new Image()
+      // img.src = "../../../assets/images/sun.png"
+      const img = document.getElementById('sun')
+      if (img) {
+        this.carCtx.drawImage(img, 250, 2, 50, 50)
+      }
     },
     draw() {
       this.roadObj.startX -= 1
       this.mountainObj.x -= 1
+      const random = Math.random() * 0.05
+      this.carObj.hue += random
       if (this.roadObj.startX <= -30) {
         this.roadObj.startX = -10
       }
       if (this.mountainObj.x <= -140) {
         this.mountainObj.x = 0
+      }
+      if (this.carObj.hue > 33) {
+        this.carObj.hue = 27
       }
       this.reset()
     },
@@ -242,12 +255,15 @@ export default {
 </script>
 <style lang="scss" scoped>
   .canvas-car {
+    img {
+      visibility: hidden;
+    }
     #car {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translateX(-50%);
-      border: 1px solid darkgoldenrod;
+      // border: 1px solid darkgoldenrod;
     }
   }
 </style>
