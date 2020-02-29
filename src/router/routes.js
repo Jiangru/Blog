@@ -1,5 +1,6 @@
 const Home = () => import('@/views/home/index.vue')
 const BlogHome = () => import('@/views/blog/index.vue')
+const Article = () => import('@/views/blog/article.vue')
 
 export default [
 	{
@@ -21,5 +22,10 @@ export default [
     meta: {
       title: '蒋如意的博客'
     }
+  },
+  {
+    path: '/blog/article',
+    name: 'Article',
+    component: Article
   }
 ]
