@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "fibers": "^5.0.0",
     "prerender-spa-plugin": "^3.4.0",
+    "sass": "^1.32.7",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
   },
